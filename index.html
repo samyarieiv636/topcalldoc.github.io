@@ -359,6 +359,12 @@
             switchLang('zh');
         });
     </script>
+            <script>
+                const pwd = prompt("请输入访问密码");
+                if (pwd !== "1234567811") {
+                  document.body.innerHTML = "Access Denied";
+                }
+            </script>
 
 </body>
 </html>
