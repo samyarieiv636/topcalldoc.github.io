@@ -4,7 +4,52 @@
     <meta charset="UTF-8">
     <title data-zh="CALL功能介绍" data-en="CALL Feature Introduction">CALL功能介绍</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; padding-top: 80px; }
+        body { font-family: sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; padding-top: 60px; }
+        .main-wrapper { display: flex; min-height: calc(100vh - 60px); }
+        .nav-sidebar {
+            position: fixed;
+            left: 0;
+            top: 60px;
+            width: 220px;
+            height: calc(100vh - 60px);
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+            padding: 20px 0;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        .nav-sidebar .nav-title {
+            padding: 0 20px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6c757d;
+        }
+        .nav-sidebar a {
+            display: block;
+            padding: 10px 20px;
+            color: #495057;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .nav-sidebar a:hover {
+            background: #e9ecef;
+            color: #7c3aed;
+        }
+        .nav-sidebar a.active {
+            background: #edf0ff;
+            color: #7c3aed;
+            border-left-color: #7c3aed;
+        }
+        .content-area {
+            flex: 1;
+            margin-left: 220px;
+            padding: 30px 40px 60px;
+            max-width: 900px;
+        }
+        .doc-section { scroll-margin-top: 80px; }
+        html { scroll-behavior: smooth; }
         
         .header {
             position: fixed;
@@ -101,10 +146,29 @@
         </div>
     </div>
 
-    <div data-lang="zh">
+    <div class="main-wrapper">
+        <nav class="nav-sidebar">
+            <div class="nav-title" data-zh="目录" data-en="Contents">目录</div>
+            <a href="#section-overview" class="nav-link active" data-zh="功能概述" data-en="Overview">功能概述</a>
+            <a href="#section-risk" class="nav-link" data-zh="风险提示" data-en="Risk Notice">风险提示</a>
+            <a href="#section-auto-call" class="nav-link" data-zh="自动call" data-en="Auto Call">自动call</a>
+            <a href="#section-manual-call" class="nav-link" data-zh="手动call" data-en="Manual Call">手动call</a>
+        </nav>
+
+        <main class="content-area">
+        <section id="section-overview" class="doc-section">
+        <div data-lang="zh">
         <h1>CALL功能介绍</h1>
         <p>CALL功能分为自动call和手动call两种，也称自动派彩和手动派彩，自动call主要为了解决玩家的游戏体验感，手动call主要是把这个调用的方式交由给运营商来定制化使用</p>
+        </div>
+        <div data-lang="en">
+        <h1>CALL Feature Introduction</h1>
+        <p>The CALL feature is divided into two types: automatic call and manual call, also known as automatic payout and manual payout. Automatic call is mainly to solve the player's gaming experience, while manual call is mainly to hand over the calling method to operators for customized use.</p>
+        </div>
+        </section>
 
+        <section id="section-risk" class="doc-section">
+        <div data-lang="zh">
         <div class="note">
             <p><strong>请注意，call功能默认不开放后台配置权限，确认后可以向我方技术申请开启，自动call和手动call功能权限是放在一起的，需要知悉以下风险：</strong></p>
             <p>手动call影响的点可能有</p>
@@ -134,7 +198,40 @@
         <div class="note">
             <p class="important">如申请开通即认为贵司已经知晓以上风险，使用手动call不当导致产生的费用都是需要交收的，请你理解</p>
         </div>
+        </div>
+        <div data-lang="en">
+        <div class="note">
+            <p><strong>Please note that the call feature is not open for backend configuration permissions by default. After confirmation, you can apply to our technical team to enable it. The permissions for automatic call and manual call are placed together. Please be aware of the following risks:</strong></p>
+            <p>The impact points of manual call may include:</p>
+        </div>
+        <ol>
+            <li>
+                <p>In addition to normal GGR charges, the amount manually called out will offset the system's normal payout portion and be settled by multiplying the rate.</p>
+                <div class="example">
+                    <p><strong>Example:</strong></p>
+                    <p><strong>Under normal charging conditions:</strong></p>
+                    <p>(Bet - System Normal Payout) * Rate</p>
+                    <p>Player bets 100, system normal payout 90, then the charge = 10 * Rate</p>
+                    <p><strong>Under manual call conditions:</strong> System normal payout = 0</p>
+                    <p>(Bet - (System Normal Payout + Call Payout) + Call Payout) * Rate</p>
+                    <p>Player bets 100, call payout 200, then the charge = 100 * Rate</p>
+                </div>
+            </li>
+            <li>
+                <p>Another impact point is from your company's perspective. For example, if your company's backend accounts are not properly managed, there may be situations where internal personnel use it without authorization to pay out to designated players, which may cause losses.</p>
+            </li>
+            <li>
+                <p>If there is a need to use the call feature, it is recommended to only use automatic Call. There is no charge for setting automatic Call in the backend.</p>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="important">If you apply for activation, it is considered that your company is aware of the above risks. Fees incurred from improper use of manual call are subject to settlement. Please understand.</p>
+        </div>
+        </div>
+        </section>
 
+        <section id="section-auto-call" class="doc-section">
+        <div data-lang="zh">
         <h2>自动call（自动派彩）</h2>
         <div class="note">
             <p><strong>请留意：</strong>自动call算法生效需要大量的下注数据，当前目标RTP计算的值和实际RTP计算的值误差大于2000本代理币种的时候是最容易触发</p>
@@ -167,7 +264,34 @@
                 </ol>
             </li>
         </ol>
+        </div>
+        <div data-lang="en">
+        <h2>Automatic Call (Automatic Payout)</h2>
+        <div class="note">
+            <p><strong>Please note:</strong> The automatic call algorithm requires a large amount of betting data to take effect. It is most likely to trigger when the error between the current target RTP calculated value and the actual RTP calculated value is greater than 2000 units of the agent currency.</p>
+            <p><strong>For example:</strong></p>
+            <p>When target RTP = 90, current total bet 10000, total payout 9000, it is not easy to trigger the automatic call algorithm</p>
+            <p>When target RTP = 90, current total bet 10000, total payout 6000, it is easy to trigger the automatic call algorithm</p>
+        </div>
+        <ol>
+            <li><p>Menu entry: <code>Slot>Auto Call Setting</code></p></li>
+            <li><p>Select the corresponding game provider</p></li>
+            <li>
+                <p>Configuration page introduction</p>
+                <ol>
+                    <li><p><strong>Percent:</strong> The value of overall RTP deduction, for example: 5, then all players' target RTP will be -5. The deducted 5% RTP will be used to randomly pay out to a small number of players to achieve a situation where a small number of players actually profit, but the overall agent data will still maintain a profitable state. Recommended configuration: 5~10 range</p></li>
+                    <li><p><strong>MaxAmount Per Day:</strong> The maximum payout amount each player can receive per day. 0 means unlimited, default is 0</p></li>
+                    <li><p><strong>Trigger Balance:</strong> Trigger balance configuration, for example, if configured as 100, it will only trigger when the player's balance is greater than 100. Default is 0, no balance restriction</p></li>
+                    <li><p><strong>Trigger Total Bet:</strong> Trigger bet amount configuration, for example, if configured as 100, it will only trigger when the player's bet is greater than 100. Default is 0, no bet restriction</p></li>
+                    <li><p><strong>Mode:</strong> Enable to turn on, Disable to turn off</p></li>
+                </ol>
+            </li>
+        </ol>
+        </div>
+        </section>
 
+        <section id="section-manual-call" class="doc-section">
+        <div data-lang="zh">
         <h2>手动call（手动派彩）</h2>
         <div class="note">
             <p class="important"><strong>需要留意：</strong>手动call会产生额外的消耗费用，详细请参考以上功能介绍中的详细介绍</p>
@@ -212,94 +336,20 @@
         <div class="note">
             <p class="important">请留意：手动派彩会影响到整体RTP的计算，比如正常整体RTP维持在95，因手动派彩导致超过100的情况我方不负责，辛苦留意</p>
         </div>
-    </div>
-
-
-
-    <div data-lang="en">
-        <h1>CALL Feature Introduction</h1>
-        <p>The CALL feature is divided into two types: automatic call and manual call, also known as automatic payout and manual payout. Automatic call is mainly to solve the player's gaming experience, while manual call is mainly to hand over the calling method to operators for customized use.</p>
-
-        <div class="note">
-            <p><strong>Please note that the call feature is not open for backend configuration permissions by default. After confirmation, you can apply to our technical team to enable it. The permissions for automatic call and manual call are placed together. Please be aware of the following risks:</strong></p>
-            <p>The impact points of manual call may include:</p>
         </div>
-
-        <ol>
-            <li>
-                <p>In addition to normal GGR charges, the amount manually called out will offset the system's normal payout portion and be settled by multiplying the rate.</p>
-                <div class="example">
-                    <p><strong>Example:</strong></p>
-                    <p><strong>Under normal charging conditions:</strong></p>
-                    <p>(Bet - System Normal Payout) * Rate</p>
-                    <p>Player bets 100, system normal payout 90, then the charge = 10 * Rate</p>
-                    <p><strong>Under manual call conditions:</strong> System normal payout = 0</p>
-                    <p>(Bet - (System Normal Payout + Call Payout) + Call Payout) * Rate</p>
-                    <p>Player bets 100, call payout 200, then the charge = 100 * Rate</p>
-                </div>
-            </li>
-            <li>
-                <p>Another impact point is from your company's perspective. For example, if your company's backend accounts are not properly managed, there may be situations where internal personnel use it without authorization to pay out to designated players, which may cause losses.</p>
-            </li>
-            <li>
-                <p>If there is a need to use the call feature, it is recommended to only use automatic Call. There is no charge for setting automatic Call in the backend.</p>
-            </li>
-        </ol>
-
-        <div class="note">
-            <p class="important">If you apply for activation, it is considered that your company is aware of the above risks. Fees incurred from improper use of manual call are subject to settlement. Please understand.</p>
-        </div>
-
-        <h2>Automatic Call (Automatic Payout)</h2>
-        <div class="note">
-            <p><strong>Please note:</strong> The automatic call algorithm requires a large amount of betting data to take effect. It is most likely to trigger when the error between the current target RTP calculated value and the actual RTP calculated value is greater than 2000 units of the agent currency.</p>
-            <p><strong>For example:</strong></p>
-            <p>When target RTP = 90, current total bet 10000, total payout 9000, it is not easy to trigger the automatic call algorithm</p>
-            <p>When target RTP = 90, current total bet 10000, total payout 6000, it is easy to trigger the automatic call algorithm</p>
-        </div>
-
-        <ol>
-            <li><p>Menu entry: <code>Slot>Auto Call Setting</code></p></li>
-            <li><p>Select the corresponding game provider</p></li>
-            <li>
-                <p>Configuration page introduction</p>
-                <ol>
-                    <li>
-                        <p><strong>Percent:</strong> The value of overall RTP deduction, for example: 5, then all players' target RTP will be -5. The deducted 5% RTP will be used to randomly pay out to a small number of players to achieve a situation where a small number of players actually profit, but the overall agent data will still maintain a profitable state. Recommended configuration: 5~10 range</p>
-                    </li>
-                    <li>
-                        <p><strong>MaxAmount Per Day:</strong> The maximum payout amount each player can receive per day. 0 means unlimited, default is 0</p>
-                    </li>
-                    <li>
-                        <p><strong>Trigger Balance:</strong> Trigger balance configuration, for example, if configured as 100, it will only trigger when the player's balance is greater than 100. Default is 0, no balance restriction</p>
-                    </li>
-                    <li>
-                        <p><strong>Trigger Total Bet:</strong> Trigger bet amount configuration, for example, if configured as 100, it will only trigger when the player's bet is greater than 100. Default is 0, no bet restriction</p>
-                    </li>
-                    <li>
-                        <p><strong>Mode:</strong> Enable to turn on, Disable to turn off</p>
-                    </li>
-                </ol>
-            </li>
-        </ol>
-
+        <div data-lang="en">
         <h2>Manual Call (Manual Payout)</h2>
         <div class="note">
             <p class="important"><strong>Please note:</strong> Manual call will generate additional consumption fees. For details, please refer to the detailed introduction in the feature introduction above.</p>
         </div>
-
         <ol>
             <li><p>Menu entry: <code>Slot>Active User & Call</code></p></li>
             <li><p>Select the corresponding game provider</p></li>
             <li>
                 <p>Configuration page introduction</p>
                 <ol>
-                    <li>
-                        <p><strong>Online users:</strong> Display current online players, can only be sent to current online players</p>
-                    </li>
-                    <li>
-                        <p>In the Control column, there is a small gift icon. Click to open the delivery options</p>
-                    </li>
+                    <li><p><strong>Online users:</strong> Display current online players, can only be sent to current online players</p></li>
+                    <li><p>In the Control column, there is a small gift icon. Click to open the delivery options</p></li>
                     <li>
                         <p>For example, in the dropdown selection: <code>1320.45x (Free) > 26,409</code></p>
                         <ol>
@@ -309,24 +359,23 @@
                             <li><p><code>26,409</code>: Indicates the approximate total amount to be given (This is an approximate amount, not completely accurate, please note)</p></li>
                         </ol>
                     </li>
-                    <li>
-                        <p>Click to confirm the configuration and wait for the system to send rewards to players</p>
-                    </li>
+                    <li><p>Click to confirm the configuration and wait for the system to send rewards to players</p></li>
                 </ol>
             </li>
         </ol>
-
         <p>Manual call configuration may not necessarily be successful. If the player exits the game, changes games, or modifies the bet amount, it may cause manual payout failure. To confirm whether the payout was successful, please refer to the payout history. Steps to view payout history: Menu <code>Game History>Call log</code></p>
-
         <ul>
             <li><strong>Waiting:</strong> The call has been sent, but the user has not yet spun (in this case, you can click the button to cancel the call).</li>
             <li><strong>Processing:</strong> Applying the bet (i.e., the user is winning the bet amount)</li>
             <li><strong>Applied:</strong> Applied (payout successful)</li>
         </ul>
-
         <div class="note">
             <p class="important">Please note: Manual payout will affect the overall RTP calculation. For example, if the normal overall RTP is maintained at 95, and manual payout causes it to exceed 100, we are not responsible. Please note.</p>
         </div>
+        </div>
+        </section>
+
+        </main>
     </div>
 
     <script>
@@ -357,7 +406,41 @@
         // 初始化：默认中文
         document.addEventListener('DOMContentLoaded', function() {
             switchLang('zh');
+            initNav();
         });
+
+        // 导航菜单功能
+        function initNav() {
+            const links = document.querySelectorAll('.nav-sidebar .nav-link');
+            const sections = document.querySelectorAll('.doc-section');
+
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').slice(1);
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        links.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            // 滚动时高亮当前所在章节
+            function updateActiveOnScroll() {
+                let current = sections[0]?.id || '';
+                const headerOffset = 120;
+                sections.forEach(section => {
+                    const top = section.getBoundingClientRect().top;
+                    if (top <= headerOffset) current = section.id;
+                });
+                links.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+                });
+            }
+            window.addEventListener('scroll', updateActiveOnScroll);
+        }
     </script>
             <script>
                 const pwd = prompt("请输入访问密码");
